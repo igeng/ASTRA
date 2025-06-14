@@ -1,2 +1,2 @@
 # ASTRA
-A
+The source code and datasets of ASTRA.
