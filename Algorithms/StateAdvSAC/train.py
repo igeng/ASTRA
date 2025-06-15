@@ -55,6 +55,7 @@ def train(config):
     action1_size = env.action_space[0]
     action2_size = env.action_space[1]
     action_size = action1_size.n * action2_size.n
+    # action_size = action1_size.n * action2_size.n + 1
 
     agent = AdvSAC(state_size=env.observation_space.shape[0],
                 action_size=action_size,
