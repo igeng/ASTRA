@@ -6,8 +6,8 @@ from torch.nn.utils import clip_grad_norm_
 from networks import Critic, Actor
 import copy
 
-
-class SAC(nn.Module):
+# Modify class name
+class AdvSAC(nn.Module):
     """Interacts with and learns from the environment."""
     
     def __init__(self, state_size, action_size, device, epsilon):
@@ -19,7 +19,7 @@ class SAC(nn.Module):
             action_size (int): dimension of each action
             random_seed (int): random seed
         """
-        super(SAC, self).__init__()
+        super(AdvSAC, self).__init__()
         self.state_size = state_size
         self.action_size = action_size
 

@@ -15,7 +15,7 @@ import argparse
 from buffer import ReplayBuffer
 from utils import save, collect_random
 import random
-from agent import SAC
+from agent import AdvSAC
 from ResourceEstimator.Env.SockShopSimulator_HyAtSSm_SttAdvSAC import SockShopSimulatorHyAtSSMSttAdvSAC
 
 
@@ -56,7 +56,7 @@ def train(config):
     action2_size = env.action_space[1]
     action_size = action1_size.n * action2_size.n
 
-    agent = SAC(state_size=env.observation_space.shape[0],
+    agent = AdvSAC(state_size=env.observation_space.shape[0],
                 action_size=action_size,
                 device=device, epsilon=0.0001)
 
