@@ -8,17 +8,8 @@ import copy
 
 # Modify class name
 class AdvSAC(nn.Module):
-    """Interacts with and learns from the environment."""
-    
+
     def __init__(self, state_size, action_size, device, epsilon):
-        """Initialize an Agent object.
-        
-        Params
-        ======
-            state_size (int): dimension of each state
-            action_size (int): dimension of each action
-            random_seed (int): random seed
-        """
         super(AdvSAC, self).__init__()
         self.state_size = state_size
         self.action_size = action_size
@@ -61,7 +52,6 @@ class AdvSAC(nn.Module):
         self.epsilon = epsilon
     
     def get_action(self, state):
-        """Returns actions for given state as per current policy."""
         state = torch.from_numpy(state).float().to(self.device)
         
         with torch.no_grad():
@@ -80,18 +70,6 @@ class AdvSAC(nn.Module):
         return actor_loss, log_action_pi, min_Q
     
     def learn(self, step, experiences, gamma, d=1):
-        """Updates actor, critics and entropy_alpha parameters using given batch of experience tuples.
-        Q_targets = r + γ * (min_critic_target(next_state, actor_target(next_state)) - α *log_pi(next_action|next_state))
-        Critic_loss = MSE(Q, Q_target)
-        Actor_loss = α * log_pi(a|s) - Q(s,a)
-        where:
-            actor_target(state) -> action
-            critic_target(state, action) -> Q-value
-        Params
-        ======
-            experiences (Tuple[torch.Tensor]): tuple of (s, a, r, s', done) tuples 
-            gamma (float): discount factor
-        """
         states, actions, rewards, next_states, dones = experiences
         states.requires_grad = True
 
@@ -162,13 +140,5 @@ class AdvSAC(nn.Module):
         return actor_loss.item(), alpha_loss.item(), critic1_loss.item(), critic2_loss.item(), current_alpha
 
     def soft_update(self, local_model , target_model):
-        """Soft update model parameters.
-        θ_target = τ*θ_local + (1 - τ)*θ_target
-        Params
-        ======
-            local_model: PyTorch model (weights will be copied from)
-            target_model: PyTorch model (weights will be copied to)
-            tau (float): interpolation parameter 
-        """
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
             target_param.data.copy_(self.tau*local_param.data + (1.0-self.tau)*target_param.data)
