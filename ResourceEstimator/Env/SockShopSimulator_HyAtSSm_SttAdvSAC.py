@@ -58,10 +58,10 @@ class SockShopSimulatorHyAtSSMSttAdvSAC(gym.Env):
         self.train_step = train_step
 
         # Actions identified by integers 0-n -> 21 actions!
-        self.num_actions = 3
+        # self.num_actions = 3
 
         # Actions identified by integers 0-n -> 15 actions! (1 + 7 * 2)
-        # self.num_actions = 2
+        self.num_actions = 2
 
         self.action_space = spaces.MultiDiscrete([7, self.num_actions])
 
@@ -249,59 +249,59 @@ class SockShopSimulatorHyAtSSMSttAdvSAC(gym.Env):
     def trans(self, action):
         # 定义一个字典来映射动作到服务索引和服务变更
         # 每个服务的变更范围是[-1,1]
-        mapping = {
-            0: (0, -1),  # carts, decrease by 1
-            1: (0, 0),  # carts, no change
-            2: (0, 1),  # carts, increase by 1
-
-            3: (1, -1),  # catalogue, decrease by 1
-            4: (1, 0),  # catalogue, no change
-            5: (1, 1),  # catalogue, increase by 1
-
-            6: (2, -1),  # front-end, decrease by 1
-            7: (2, 0),  # front-end, no change
-            8: (2, 1),  # front-end, increase by 1
-
-            9: (3, -1),  # orders, decrease by 1
-            10: (3, 0),  # orders, no change
-            11: (3, 1),  # orders, increase by 1
-
-            12: (4, -1),  # payment, decrease by 1
-            13: (4, 0),  # payment, no change
-            14: (4, 1),  # payment, increase by 1
-
-            15: (5, -1),  # shipping, decrease by 1
-            16: (5, 0),  # shipping, no change
-            17: (5, 1),  # shipping, increase by 1
-
-            18: (6, -1),  # user, decrease by 1
-            19: (6, 0),  # user, no change
-            20: (6, 1),  # user, increase by 1
-        }
-
         # mapping = {
-        #     0: (0, 0),  # no change
-        #     1: (0, -1),  # carts, decrease by 1
+        #     0: (0, -1),  # carts, decrease by 1
+        #     1: (0, 0),  # carts, no change
         #     2: (0, 1),  # carts, increase by 1
         #
         #     3: (1, -1),  # catalogue, decrease by 1
-        #     4: (1, 1),  # catalogue, increase by 1
+        #     4: (1, 0),  # catalogue, no change
+        #     5: (1, 1),  # catalogue, increase by 1
         #
-        #     5: (2, -1),  # front-end, decrease by 1
-        #     6: (2, 1),  # front-end, increase by 1
+        #     6: (2, -1),  # front-end, decrease by 1
+        #     7: (2, 0),  # front-end, no change
+        #     8: (2, 1),  # front-end, increase by 1
         #
-        #     7: (3, -1),  # orders, decrease by 1
-        #     8: (3, 1),  # orders, increase by 1
+        #     9: (3, -1),  # orders, decrease by 1
+        #     10: (3, 0),  # orders, no change
+        #     11: (3, 1),  # orders, increase by 1
         #
-        #     9: (4, -1),  # payment, decrease by 1
-        #     10: (4, 1),  # payment, increase by 1
+        #     12: (4, -1),  # payment, decrease by 1
+        #     13: (4, 0),  # payment, no change
+        #     14: (4, 1),  # payment, increase by 1
         #
-        #     11: (5, -1),  # shipping, decrease by 1
-        #     12: (5, 1),  # shipping, increase by 1
+        #     15: (5, -1),  # shipping, decrease by 1
+        #     16: (5, 0),  # shipping, no change
+        #     17: (5, 1),  # shipping, increase by 1
         #
-        #     13: (6, -1),  # user, decrease by 1
-        #     14: (6, 1),  # user, increase by 1
+        #     18: (6, -1),  # user, decrease by 1
+        #     19: (6, 0),  # user, no change
+        #     20: (6, 1),  # user, increase by 1
         # }
+
+        mapping = {
+            0: (0, 0),  # no change
+            1: (0, -1),  # carts, decrease by 1
+            2: (0, 1),  # carts, increase by 1
+
+            3: (1, -1),  # catalogue, decrease by 1
+            4: (1, 1),  # catalogue, increase by 1
+
+            5: (2, -1),  # front-end, decrease by 1
+            6: (2, 1),  # front-end, increase by 1
+
+            7: (3, -1),  # orders, decrease by 1
+            8: (3, 1),  # orders, increase by 1
+
+            9: (4, -1),  # payment, decrease by 1
+            10: (4, 1),  # payment, increase by 1
+
+            11: (5, -1),  # shipping, decrease by 1
+            12: (5, 1),  # shipping, increase by 1
+
+            13: (6, -1),  # user, decrease by 1
+            14: (6, 1),  # user, increase by 1
+        }
 
         # 获取对应的服务索引和服务变更
         service_index, change = mapping[action]
