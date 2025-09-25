@@ -247,7 +247,7 @@ class SockShopSimulatorHyAtSSMSttAdvSAC(gym.Env):
 
 
     def trans(self, action):
-        # 定义一个字典来映射动作到服务索引和服务变更
+        # 定义一个字典来映射动作到服务索引和服务变更,对应不同的动作空间设计
         # 每个服务的变更范围是[-1,1]
         # mapping = {
         #     0: (0, -1),  # carts, decrease by 1
